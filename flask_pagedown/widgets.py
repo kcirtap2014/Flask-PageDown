@@ -1,6 +1,7 @@
 from wtforms.widgets import HTMLString, TextArea
 
 pagedown_pre_html = '<div class="flask-pagedown">'
+pagedown_toolbar_html = '<div id="wmd-button-bar"></div>'
 pagedown_post_html = '</div>'
 preview_html = '''
 <div class="flask-pagedown-preview" id="flask-pagedown-%(field)s-preview"></div>
@@ -39,7 +40,7 @@ class PageDown(TextArea):
             class_ = kwargs.pop('class', '').split() + \
                 kwargs.pop('class_', '').split()
             class_ += ['flask-pagedown-input']
-            html += pagedown_pre_html + super(PageDown, self).__call__(
+            html += pagedown_pre_html + pagedown_toolbar_html + super(PageDown, self).__call__(
                 field, id='flask-pagedown-' + field.name,
                 class_=' '.join(class_), **kwargs) + pagedown_post_html
         if show_preview:
